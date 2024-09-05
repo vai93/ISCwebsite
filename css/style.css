@@ -275,7 +275,8 @@ a {
       height: 70%; }
 
 .why-choose-section {
-  padding: 7rem 0; }
+  padding: 7rem 0;
+  text-align: justify; }
   .why-choose-section .img-wrap {
     position: relative; }
     .why-choose-section .img-wrap:before {
@@ -864,3 +865,56 @@ animation: fadeInLeftnew 1s forwards 1s;
   /* animation-name: fadeInUp; */
 }
 
+
+.why-choose-section1 {
+  margin-top: 4%;
+  margin-left: 200px;
+  margin-bottom: -150px;
+  font-size: 16px;
+}
+
+.img-wrap img {
+  height: 380px;
+  width: 100%; /* Ensure the image covers the full width of its container */
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
+.content-wrap {
+  margin-left: -30%;
+  margin-top: -90px;
+  margin-right: 10%;
+}
+
+/* Responsive styles for mobile view */
+@media (max-width: 992px) { /* Bootstrap's breakpoint for tablets and below */
+  .why-choose-section1 {
+      margin-left: 0;
+      margin-bottom: 0;
+  }
+
+  .img-wrap img {
+      height: auto; /* Adjust height for mobile */
+      width: 100%;
+  }
+
+  .content-wrap {
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 25px; /* Add some space above the content */
+  }
+
+  .row {
+      flex-direction: column; /* Stack columns vertically on mobile */
+  }
+
+  .col {
+      margin: 0; /* Reset margin */
+      width: 100%; /* Full width */
+  }
+  .wrapWCU {
+    align-items: center;
+    width:150%;
+    margin-left: -20%;
+  }
+
+}
