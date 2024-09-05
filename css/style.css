@@ -826,26 +826,52 @@ animation: fadeInLeftnew 1s forwards 1s;
     padding: 20px;
   }
 
-  .slider {
+  .slider-container {
+    width: 100%;
+    overflow: hidden; /* Hide the overflow content */
+}
+
+.slider {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    animation: slide 20s linear infinite;
+    animation: slide 30s linear infinite; /* Adjust duration for speed */
 }
 
 .slider img {
-  width: 100px;
-  height: 20vh;
-  margin: 0 20px;
+    /* Flex properties */
+    flex: 0 0 auto; /* Prevent flex items from shrinking */
+    height: auto; /* Maintain aspect ratio */
+    padding: 10px; /* Optional padding between logos */
+}
+
+/* For larger screens (e.g., desktop) */
+@media (min-width: 1024px) {
+    .slider img {
+        width: calc(100% / 10); /* Approximately 10 logos visible */
+    }
+}
+
+/* For tablets */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .slider img {
+        width: calc(100% / 6); /* Approximately 6 logos visible */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    .slider img {
+        width: calc(100% / 5); /* Approximately 5 logos visible */
+    }
 }
 
 @keyframes slide {
-  0% {
-    transform: translateX(0);
-}
-100% {
-    transform: translateX(-50%);
-}
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 @keyframes fadeInUp {
@@ -884,7 +910,12 @@ animation: fadeInLeftnew 1s forwards 1s;
   margin-top: -90px;
   margin-right: 10%;
 }
-
+.fot{
+  margin-left:-30px
+}
+.cright{
+  width: 100%;
+}
 /* Responsive styles for mobile view */
 @media (max-width: 992px) { /* Bootstrap's breakpoint for tablets and below */
   .why-choose-section1 {
@@ -895,6 +926,8 @@ animation: fadeInLeftnew 1s forwards 1s;
   .img-wrap img {
       height: auto; /* Adjust height for mobile */
       width: 100%;
+      align-items: center;
+      margin-left: 0;
   }
 
   .content-wrap {
@@ -916,5 +949,26 @@ animation: fadeInLeftnew 1s forwards 1s;
     width:150%;
     margin-left: -20%;
   }
-
+  .wow {
+    animation-duration: 1s !important;
+    animation-delay: 0.1s !important;
+}
+.proCar{
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 80%;
+}
+.WCU{
+  width:80%
+}
+.fot{
+  margin-left:10%;
+}
+.cright{
+  width: 100%;
+}
+.foot{
+  margin-left:1%;
+  width:90%;
+}
 }
