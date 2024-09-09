@@ -932,7 +932,7 @@ animation: fadeInLeftnew 1s forwards 1s;
   background-size: cover; 
   background-repeat: no-repeat;
 }
-.no-overlay {
+.heroProduct .no-overlay {
   color: rgba(255, 255, 255);
   z-index: 50;
   font-weight: 700;
@@ -941,16 +941,73 @@ animation: fadeInLeftnew 1s forwards 1s;
   position: relative; /* So it respects z-index layers */
   z-index: 2; /* Ensures content is above the overlay */
    }
-    @media (min-width: 1400px) {
+@media (min-width: 1400px) {
       .heroProduct h1 {
         font-size: 54px; } 
   }
+
+  .heroContact {
+    position: relative; /* Set relative positioning for stacking elements */
+    height: 70vh;
+    width: 100vw;
+    overflow: hidden; /* Ensures the background doesn't overflow */
+    overflow-y: hidden;
+  }
+  
+  .heroContact .background-image {
+    background-image: url();
+    position: absolute; /* Make the image act as a background */
+    top: 0;
+    left: 0;
+    height: 85vh;
+    width: 100vw;
+    object-fit: fill; /* Ensures the image stretches to cover the entire div */
+    z-index: 0; /* Behind the content */
+  }
+  
+  .heroContact .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 85vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1; /* Above the image, but behind the text */
+  }
+  
+  .heroContact .container {
+    position: relative;
+    z-index: 2; /* Ensure content is on top of both the image and overlay */
+    color: white;
+    font-weight: 700;
+    margin-bottom: 30px; 
+    margin-top:10%;
+    margin-left:37%
+  }
+  
+  .heroContact h6{
+    margin-left:4%;
+  }
+
   .proB{
     font-size: 16px;
   }
   .pimg{
     width: 50vw; /* Takes up 50% of the viewport's width */
     height: 45vh; 
+  }
+  .proHR{
+    margin-top:-20px;
+    margin-bottom:70px;
+    width:25%
+  }
+  .ConPhone{
+    margin-left: 20%;
+  }
+  .conDetail{
+    margin-top:-3px;
+    position:relative;
+    z-index: 500;
   }
 @media (max-width: 992px) { /* Bootstrap's breakpoint for tablets and below */
   .why-choose-section1 {
@@ -1035,8 +1092,34 @@ html, body {
   background-size: contain; 
   background-repeat: no-repeat;
 }
-.no-overlay{
+.heroProduct .no-overlay{
   margin-top:95%;
+}
+
+/*contact page.....*/
+.heroContact {
+  height: 50vh;
+}
+
+.heroContact .background-image {
+  height: 100vh;
+  background: url("images/contact-us.jpg");
+}
+
+.heroContact .overlay {
+  height: 50vh;
+}
+
+.heroContact .container {
+  font-weight: 600;
+  margin-bottom: 30px; 
+  margin-top:30%;
+  margin-left:18%;
+  width:67%;
+  text-align: center;
+}
+.heroContact .h6{
+  margin-left:2%;
 }
 .proB{
   font-size: 14px;
@@ -1047,5 +1130,17 @@ html, body {
 .pimg{
   width: 95vw; /* Takes up 50% of the viewport's width */
   height: 45vh; 
+}
+.proHR{
+  margin-top:-15%;
+  margin-bottom:70px;
+}
+.ConPhone{
+  margin-left: 0%;
+}
+.conDetail{
+  margin-top:-13%;
+  position:relative;
+  z-index: 500;
 }
 }
