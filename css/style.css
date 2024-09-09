@@ -1010,6 +1010,30 @@ animation: fadeInLeftnew 1s forwards 1s;
     position:relative;
     z-index: 500;
   }
+  .heroCareer{
+    height: 60vh;
+    background: url('../images/joinUs/Job2.png');
+    background-size: cover;
+		background-repeat: no-repeat; 
+    background-position: center;
+    opacity: 1;
+    position: relative; 
+  }
+  .heroCareer .overlay{
+    height: 60vh;
+   }
+   .careerOpen{
+    font-size: 20px;
+    
+  }
+  .careerAB{
+    width: 10vw;
+    font-size: small;
+  }
+ .careeJoin{
+  margin-top: 10vh;
+  margin-left:23%
+}
 @media (max-width: 992px) { /* Bootstrap's breakpoint for tablets and below */
   .why-choose-section1 {
       margin-left: 0;
@@ -1147,5 +1171,33 @@ html, body {
 .untree_co-section {
   padding: 7rem 0;
   margin-left: 0%; }
+.heroCareer{
+    height: 30vh;
+    background: url('../images/joinUs/Job2.png');
+    background-size: contain;
+		background-repeat: no-repeat; 
+    background-position: center;
+    opacity: 1;
+    position: relative; 
+  }
+  .heroCareer .overlay{
+    height: 30vh;
+   }
+.careerOpen{
+  font-size: 16px;
+  
+}
+.careerOpen button{
+  margin-bottom: 10px;
+  
+}
+.careerAB{
+  width: 40vw;
+  font-size: small;
+}
+.careeJoin{
+  margin-top: 3vh;
+  margin-left:0%
+}
 
 }
