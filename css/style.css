@@ -628,7 +628,8 @@ a {
       font-size: 14px !important; }
 
 .untree_co-section {
-  padding: 7rem 0; }
+  padding: 7rem 0;
+  margin-left: 15%; }
 
 .form-control {
   height: 50px;
@@ -1143,4 +1144,8 @@ html, body {
   position:relative;
   z-index: 500;
 }
+.untree_co-section {
+  padding: 7rem 0;
+  margin-left: 0%; }
+
 }
