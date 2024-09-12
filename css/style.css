@@ -1109,7 +1109,9 @@ animation: fadeInLeftnew 1s forwards 1s;
   opacity: 1;
   transform: translateY(0);
 }
-
+.hide-content > *:not(.modal, .modal-backdrop) {
+  visibility: hidden; /* Hide all content except the modal and modal backdrop */
+}
 @media (max-width: 992px) { /* Bootstrap's breakpoint for tablets and below */
   .why-choose-section1 {
       margin-left: 0;

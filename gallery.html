@@ -376,9 +376,18 @@
 		modalimg.src=imgSrc
     	// modal.id= imgSrc.replace(/\W+/g, '');
     
-    
+		
     	var modalInstance = new bootstrap.Modal(modal);
-    	modalInstance.show();
+		modal.addEventListener('show.bs.modal', function () {
+        document.body.classList.add('hide-content'); // Add class to hide content
+    	});
+
+    	// When the modal is closed, show the background content again
+   		modal.addEventListener('hidden.bs.modal', function () {
+        document.body.classList.remove('hide-content'); // Remove class to show content
+    	});
+
+   		 modalInstance.show();
 }
 	</script>
 </body>
