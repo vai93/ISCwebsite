@@ -870,6 +870,13 @@ animation: fadeInLeftnew 1s forwards 1s;
   margin-top:-2%;
   margin-bottom:1%
 }
+.white-close-btn {
+  filter: invert(1); /* This inverts the default color to white */
+}
+
+.white-close-btn:focus {
+  box-shadow: none; /* Removes the outline when focused */
+}
 /* For larger screens (e.g., desktop) */
 @media (min-width: 1024px) {
     .slider img {
