@@ -523,9 +523,10 @@ a {
     margin-bottom: 20px; }
     .blog-section .post-entry .post-thumbnail img {
       border-radius: 20px;
-      -webkit-transition: .3s all ease;
-      -o-transition: .3s all ease;
-      transition: .3s all ease; }
+      -webkit-transform: scale(1);
+	  transform: scale(1);
+  	-webkit-transition: .3s ease-in-out;
+	  transition: .3s ease-in-out; }
   .blog-section .post-entry .post-content-entry {
     padding-left: 15px;
     padding-right: 15px; }
@@ -539,7 +540,28 @@ a {
       .blog-section .post-entry .post-content-entry .meta a {
         font-weight: 600; }
   .blog-section .post-entry:hover .post-thumbnail img, .blog-section .post-entry:focus .post-thumbnail img {
-    opacity: .7; }
+    opacity: 1;
+    /* animation: flash 1.5s; */
+    -webkit-transform: scale(1.3);
+	  transform: scale(1.3);
+    }
+    @-webkit-keyframes flash {
+      0% {
+        opacity: .4;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    @keyframes flash {
+      0% {
+        opacity: .4;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
 
 .footer-section {
   padding: 80px 0;
@@ -628,7 +650,8 @@ a {
       font-size: 14px !important; }
 
 .untree_co-section {
-  padding: 7rem 0; }
+  padding: 7rem 0;
+  margin-left: 15%; }
 
 .form-control {
   height: 50px;
@@ -753,7 +776,7 @@ textarea {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-    z-index: 1;
+    z-index:0;
 }
 
 .content1 {
@@ -801,7 +824,6 @@ animation: fadeInLeftnew 1s forwards 1s;
     position: relative; /* Establishes positioning context for the overlay */
     /* width: 100%; Adjust width as needed */
     /* height: 300px; Adjust height as needed */
-    background-size: cover; 
     background-position: center; /* Centers the background image */
     background-repeat: no-repeat; /* Prevents background repetition */
     /* */
@@ -816,6 +838,7 @@ animation: fadeInLeftnew 1s forwards 1s;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4); /* Adjust opacity for the overlay */
   }
+ 
 
   /* Optional: Styles for content within the overlay container */
   .content1 {
@@ -826,26 +849,55 @@ animation: fadeInLeftnew 1s forwards 1s;
     padding: 20px;
   }
 
-  .slider {
+  .slider-container {
+    width: 100%;
+    overflow: hidden; /* Hide the overflow content */
+}
+
+.slider {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    animation: slide 20s linear infinite;
+    animation: slide 30s linear infinite; /* Adjust duration for speed */
 }
 
 .slider img {
-  width: 100px;
-  height: 20vh;
-  margin: 0 20px;
+    /* Flex properties */
+    flex: 0 0 auto; /* Prevent flex items from shrinking */
+    height: auto; /* Maintain aspect ratio */
+    padding: 10px; /* Optional padding between logos */
+}
+.sliderDiv{
+  margin-top:-2%;
+  margin-bottom:1%
+}
+/* For larger screens (e.g., desktop) */
+@media (min-width: 1024px) {
+    .slider img {
+        width: calc(100% / 10); /* Approximately 10 logos visible */
+    }
+}
+
+/* For tablets */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .slider img {
+        width: calc(100% / 6); /* Approximately 6 logos visible */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+    .slider img {
+        width: calc(100% / 5); /* Approximately 5 logos visible */
+    }
 }
 
 @keyframes slide {
-  0% {
-    transform: translateX(0);
-}
-100% {
-    transform: translateX(-50%);
-}
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 @keyframes fadeInUp {
@@ -884,17 +936,191 @@ animation: fadeInLeftnew 1s forwards 1s;
   margin-top: -90px;
   margin-right: 10%;
 }
+.fot{
+  margin-left:-30px
+}
+.cright{
+  width: 100%;
+}
+.navMy{
+  margin-left:14%
+}
+.mtm1{
+  margin-top:5%
+}
+.heroProduct{
+  position: relative;
+  height: 60vh; 
+  background: url(images/product/1.png);
+  background-size: cover; 
+  background-repeat: no-repeat;
+}
+.heroProduct .no-overlay {
+  color: rgba(255, 255, 255);
+  z-index: 50;
+  font-weight: 700;
+  margin-bottom: 30px; 
+  margin-top:24%;
+  position: relative; /* So it respects z-index layers */
+  z-index: 2; /* Ensures content is above the overlay */
+   }
+@media (min-width: 1400px) {
+      .heroProduct h1 {
+        font-size: 54px; } 
+  }
 
-/* Responsive styles for mobile view */
+  .heroContact {
+    position: relative; /* Set relative positioning for stacking elements */
+    height: 70vh;
+    width: 100vw;
+    overflow: hidden; /* Ensures the background doesn't overflow */
+    overflow-y: hidden;
+  }
+  
+  .heroContact .background-image {
+    background-image: url();
+    position: absolute; /* Make the image act as a background */
+    top: 0;
+    left: 0;
+    height: 85vh;
+    width: 100vw;
+    object-fit: fill; /* Ensures the image stretches to cover the entire div */
+    z-index: 0; /* Behind the content */
+  }
+  
+  .heroContact .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 85vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1; /* Above the image, but behind the text */
+  }
+  
+  .heroContact .container {
+    position: relative;
+    z-index: 2; /* Ensure content is on top of both the image and overlay */
+    color: white;
+    font-weight: 700;
+    margin-bottom: 30px; 
+    margin-top:10%;
+    margin-left:37%
+  }
+  
+  .heroContact h6{
+    margin-left:4%;
+  }
+
+  .proB{
+    font-size: 16px;
+  }
+  .pimg{
+    width: 50vw; /* Takes up 50% of the viewport's width */
+    height: 45vh; 
+  }
+  .proHR{
+    margin-top:-20px;
+    margin-bottom:70px;
+    width:25%
+  }
+  .ConPhone{
+    margin-left: 20%;
+  }
+  .conDetail{
+    margin-top:-3px;
+    position:relative;
+    z-index: 500;
+  }
+  .heroCareer{
+    height: 60vh;
+    background: url('../images/joinUs/Job2.png');
+    background-size: cover;
+		background-repeat: no-repeat; 
+    background-position: center;
+    opacity: 1;
+    position: relative; 
+  }
+  .heroCareer .overlay{
+    height: 60vh;
+   }
+   .careerOpen{
+    font-size: 20px;
+    
+  }
+  .careerAB{
+    width: 10vw;
+    font-size: small;
+  }
+ .careeJoin{
+  margin-top: 10vh;
+  margin-left:23%
+}
+.heroGallery{
+  height: 60vh;
+  background: url('../images/gallery/team.jpg');
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center;
+  opacity: 1;
+  position: relative; 
+}
+.heroGallery .overlay{
+  height: 60vh;
+ }
+ .heroGallery h1{
+  margin-top:60%
+ }
+ .GalleryImg{
+  width:15rem;
+  position: relative;
+  overflow: hidden;
+ }
+ .GalleryImg img{
+  width:15rem;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(100%);
+ }
+ .GalleryImg .content{
+  position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+ }
+ .GalleryImg:hover img{
+  filter: brightness(50%);
+    transform: scale(1.05); /* Slight zoom effect */
+}
+.GalleryImg:hover .content{
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 992px) { /* Bootstrap's breakpoint for tablets and below */
   .why-choose-section1 {
       margin-left: 0;
-      margin-bottom: 0;
+      margin-bottom: -10%;
+  }
+  .why-choose-section{
+    margin-top: 0;
+    margin-bottom: -10%;
+  }
+  .mbm{
+    margin-bottom: -25%;
   }
 
   .img-wrap img {
       height: auto; /* Adjust height for mobile */
       width: 100%;
+      align-items: center;
+      margin-left: 0;
   }
 
   .content-wrap {
@@ -902,7 +1128,12 @@ animation: fadeInLeftnew 1s forwards 1s;
       margin-right: 0;
       margin-top: 25px; /* Add some space above the content */
   }
-
+  .mtm{
+    margin-top: -15%;
+  }
+  .mtm1{
+    margin-top: -1%;
+  }
   .row {
       flex-direction: column; /* Stack columns vertically on mobile */
   }
@@ -916,5 +1147,138 @@ animation: fadeInLeftnew 1s forwards 1s;
     width:150%;
     margin-left: -20%;
   }
+  .wow {
+    animation-duration: 1s !important;
+    animation-delay: 0.1s !important;
+}
+.proCar{
+  margin-left: 10%;
+  margin-right: 10px;
+  width: 80%;
+ 
+}
 
+.WCU{
+  width:80%
+}
+.fot{
+  margin-left:10%;
+}
+.cright{
+  width: 100%;
+}
+.foot{
+  margin-left:1%;
+  width:90%;
+}
+.navMy{
+  margin-left:0
+}
+html, body {
+  overflow-x: hidden;
+}
+.sliderDiv{
+  margin-top:-12%;
+  margin-bottom:2%
+}
+.heroProduct{
+  height: 60vh; 
+  background-size: contain; 
+  background-repeat: no-repeat;
+}
+.heroProduct .no-overlay{
+  margin-top:95%;
+}
+
+/*contact page.....*/
+.heroContact {
+  height: 50vh;
+}
+
+.heroContact .background-image {
+  height: 100vh;
+  background: url("images/contact-us.jpg");
+}
+
+.heroContact .overlay {
+  height: 50vh;
+}
+
+.heroContact .container {
+  font-weight: 600;
+  margin-bottom: 30px; 
+  margin-top:30%;
+  margin-left:18%;
+  width:67%;
+  text-align: center;
+}
+.heroContact .h6{
+  margin-left:2%;
+}
+.proB{
+  font-size: 14px;
+}
+.blog-section .row  {
+  width:100%
+}
+.pimg{
+  width: 95vw; /* Takes up 50% of the viewport's width */
+  height: 45vh; 
+}
+.proHR{
+  margin-top:-15%;
+  margin-bottom:70px;
+}
+.ConPhone{
+  margin-left: 0%;
+}
+.conDetail{
+  margin-top:-13%;
+  position:relative;
+  z-index: 500;
+}
+.untree_co-section {
+  padding: 7rem 0;
+  margin-left: 0%; }
+.heroCareer{
+    height: 30vh;
+    background: url('../images/joinUs/Job2.png');
+    background-size: contain;
+		background-repeat: no-repeat; 
+    background-position: center;
+    opacity: 1;
+    position: relative; 
+  }
+  .heroCareer .overlay{
+    height: 30vh;
+   }
+.careerOpen{
+  font-size: 16px;
+  
+}
+.careerOpen button{
+  margin-bottom: 10px;
+  
+}
+.careerAB{
+  width: 40vw;
+  font-size: small;
+}
+.careeJoin{
+  margin-top: 3vh;
+  margin-left:0%
+}
+.heroGallery{
+  height: 30vh;
+  background-size: contain;
+}
+.heroGallery .overlay{
+  height: 30vh;
+ }
+ .heroGallery h1{
+  margin-top:24vh;
+ }
+ .GalleryImg img,.GalleryImg{
+  width: 100%;
+ }
 }

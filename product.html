@@ -17,12 +17,6 @@
 
 	<link href="css/style.css" rel="stylesheet">
 	<title>ISC</title>
-	<style>
-		.pimg{
-			width: 50vw; /* Takes up 50% of the viewport's width */
-			height: 45vh; 
-		}
-	</style>
 </head>
 
 <body>
@@ -30,7 +24,7 @@
 	<!-- Start Header/Navigation -->
 	<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 
-		<div class="container ms-0">
+		<div class="container ms-0 ">
 			<img src="images/logo.png" alt="Image" style="height: 70px;width: 50px;margin-top:1px"><a
 				class="navbar-brand" href="index.html">
 				<p style="font-size: large;color: black;margin-top: 15px;">Indian Switchgears
@@ -38,54 +32,58 @@
 					Consultants
 				</p>
 			</a>
+			<button style="background-color: black;" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-
-			<div class="collapse navbar-collapse ms-5" id="navbarsFurni">
+			<div class="collapse navbar-collapse " id="navbarsFurni" style="margin-left:14%">
 				<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
 					<li></li>
 					<li></li>
 					<li></li>
 					<li></li>
-					<li>
+
+					<li class=" ms-0">
 						<a class="nav-link" href="index.html">Home</a>
 					</li>
 
-					<li><a class="nav-link" href="index.html#abt">About</a></li>
-					<li class="nav-item active"><a class="nav-link" href="product.html">Products</a></li>
-					<li><a class="nav-link" href="index.html#clients">Clients</a></li>
+					<li class="ms-0"><a class="nav-link" href="index.html#abt">About</a></li>
+					<li class="nav-item active ms-0"><a class="nav-link" href="product.html">Products</a></li>
+					<li class="ms-0"><a class="nav-link" href="index.html#clients">Clients</a></li>
 					<!-- <li><a class="nav-link" href="client.html">Workmanship</a></li> -->
 
-					<li><a class="nav-link" href="index.html#location">Location</a></li>
-					<li><a class="nav-link active" href="contact.html">Contact </a></li>
-					<li><a class="nav-link" href="career.html">Career</a></li>
-					<li><a class="nav-link" href="gallery.html">Gallery</a></li>
+					<li class="ms-0"><a class="nav-link" href="index.html#location">Location</a></li>
+					<li class="ms-0"><a class="nav-link" href="contact.html">Contact </a></li>
+					<li class=" ms-0"><a class="nav-link" href="career.html">Career</a></li>
+					<li class="  ms-0"><a class="nav-link" href="gallery.html">Gallery</a></li>
 				</ul>
 
-				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-0">
-					<li><a class="nav-link" href="tel:(0265)2635713"><img style="width: 25px ;margin-left:-10px"
+				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ">
+					<li><a class="nav-link" href="tel:(0265)2635713"><img style="width: 25px;margin-left:-10px"
 								src="images/call2.png" title="Call us"></a></li>
 					<li><a class="nav-link me-2" href="mailto:info@indianswitchgears.com"><img style="width: 25px"
 								src="images/mail.png" title="Mail us"></a></li>
-					<li><a class="nav-link me-0" href="ISCbrocher.pdf"><img style="width: 25px" src="images/dl.png"
+					<li><a class="nav-link me-2" href="ISCbrocher.pdf"><img style="width: 25px" src="images/dl.png"
 								title="Download our brochure"></a></li>
 				</ul>
 			</div>
+
 		</div>
 
 	</nav>
 	<!-- End Header/Navigation -->
 
 	<!-- Start Hero Section -->
-	<div class="hero p-0 overlay-container"
-		style="height: 60vh; background: url(images/product/1.png);background-size: cover; background-repeat: no-repeat;">
+	<div class="heroProduct  p-0 overlay-container "style="background: url(images/product/1.png);">
 		<div class="overlay" style="height: 60vh;"></div>
 		<div class="container me-0">
 
 			<div class="row justify-content-between ">
 				<div class="col">
-					<div class="intro-excerpt">
-						<h1 style="margin-top:60%"><i>Our Products</i></h1>
-						<!-- <h6 class="mb-4">We're here to help you level up</h6> -->
+					<div>
+						<h1 class="no-overlay"><i>Our Products</i></h1>
 					</div>
 				</div>
 
@@ -95,7 +93,7 @@
 	<!-- End Hero Section -->
 	<div class="container" style="margin-bottom: 6%;">
 		<div style="float: left;margin-top: 6%;margin-left: -4%;">
-			<button class="btn btn-primary fixedbutton ms-5" type="button" data-bs-toggle="offcanvas"
+			<button class="btn btn-primary fixedbutton ms-5 proB" type="button" data-bs-toggle="offcanvas"
 				data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">List of Machinery &
 				Equipments</button>
 
@@ -135,7 +133,7 @@
 
 		</div>
 		<div style="float: right;margin-top: 6%;">
-			<button class="btn btn-primary fixedbutton ms-5" type="button" data-bs-toggle="offcanvas"
+			<button class="btn btn-primary fixedbutton ms-5 proB" type="button" data-bs-toggle="offcanvas"
 				data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Testing Facilities</button>
 
 			<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
@@ -280,7 +278,7 @@
 											class=" pimg img-fluid"></a>
 								</div>
 								<div class="carousel-item " data-bs-interval="10000">
-									<a href="#" class="post-thumbnail"><img src="images/product/photo/mcc/MCC PANEL-1.png" alt="Image"
+									<a href="#" class="post-thumbnail"><img src="images/product/photo/MCC/MCC PANEL-1.png" alt="Image"
 											class="pimg img-fluid"></a>
 								</div>
 								<div class="carousel-item" data-bs-interval="10000">
@@ -288,7 +286,7 @@
 											class="pimg img-fluid"></a>
 								</div>
 								<div class="carousel-item" data-bs-interval="10000">
-									<a href="#" class="post-thumbnail"><img src="images/product/photo/mcc/MCC PANEL-3.jpg" alt="Image"
+									<a href="#" class="post-thumbnail"><img src="images/product/photo/MCC/MCC PANEL-3.jpg" alt="Image"
 											class="pimg img-fluid"></a>
 								</div>
 								<div class="carousel-item" data-bs-interval="10000">
@@ -923,15 +921,13 @@
 	</div>
 
 
-	<footer class="footer-section ms-5" id="contact">
-		<div class="container relative">
-
-
+	<footer class="footer-section " id="contact">
+		<div class="container relative foot">
 			<div class="row g-5 mb-0 mt-3">
 				<div class="col">
 					<div class="mb-3 footer-logo-wrap"><a href="#" class="footer-logo"
 							style="color: #3b5d50;font-weight: bold;">ISC</a></div>
-					<p class="mb-2">As one of the leading manufacturers of LT Panels and PLC-based Panels in Gujarat,
+					<p class="mb-2"style="text-align:justify">As one of the leading manufacturers of LT Panels and PLC-based Panels in Gujarat,
 						ISC boasts four decades of experience. Renowned for engineering excellence and
 						high-quality standards, it holds a distinct position in the market with precise design and
 						meticulous execution.</p>
@@ -960,7 +956,7 @@
 					</div>
 				</div>
 
-				<div class="col me- p-0" style="margin-left:-30px">
+				<div class="col p-0 fot " >
 					<div class=" footer-logo-wrap fs-5" style="color: #3b5d50;font-weight: bold; font-size: 20px;">
 						Contact Information</div>
 					<p class="mt-4"><strong>Indian Switchgears and Consultants</strong><br>
@@ -997,17 +993,16 @@
 
 		</div>
 	</footer>
-	<div class="container mt-0">
+	<div class="container mt-0 cright">
 		<div class="row ">
-			<div class="col-6">
+			<div class="col">
 				<p> © 2024 ISC Group, All rights are reserved.</p>
 			</div>
-			<div class="col-6 text-end">
+			<div class="col text-end">
 				<p>Website Design & Developed By Vaibhavi Patel</p>
 			</div>
 		</div>
 	</div>
-
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<script src="js/tiny-slider.js"></script>
 	<script src="js/custom.js"></script>
