@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --cs-primary: #848c99;
+    --cs-primary-dark: #899dc8;
+    --cs-bg-light: #F9FAFB;
+    --cs-bg-white: #FFFFFF;
+    --cs-text-dark: #1F2937;
+    --cs-text-light: #FFFFFF;
+    --cs-text-secondary: #6B7280;
+    --cs-user-bubble: #E5E7EB;
+    --cs-border-color: #E5E7EB;
+    --cs-danger: #EF4444;
+    --cs-danger-hover: #D93737;
+    --cs-success: #10B981;
+    --cs-success-hover: #0DAF78;
+    --cs-font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--cs-font-family);
+}
+
+#cschat-toggle-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--cs-primary), var(--cs-primary-dark));
+    color: var(--cs-text-light);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 5px 20px rgba(90, 141, 255, 0.4);
+    transition: all 0.3s ease;
+    z-index: 999999;
+}
+
+#cschat-toggle-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 25px rgba(90, 141, 255, 0.5);
+}
+
+#cschat-toggle-btn[aria-pressed="true"] {
+    transform: rotate(360deg);
+    background: var(--cs-text-dark);
+}
+
+#cschat-container {
+    position: fixed;
+    bottom: 95px;
+    right: 24px;
+    width: 370px;
+    height: 75vh;
+    max-height: 600px;
+    background: var(--cs-bg-white);
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 99999;
+    border: 1px solid var(--cs-border-color);
+    animation: cschat-fadeInUp 0.4s ease-out;
+}
+
+@keyframes cschat-fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#cschat-header {
+    background: #7f9196;
+    color: white;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--cs-border-color);
+    flex-shrink: 0;
+}
+
+#cschat-header .header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#cschat-close-btn {
+    background: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#cschat-close-btn:hover {
+    color: var(--cs-danger);
+    transform: scale(1.2);
+}
+
+#cschat-output {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px;
+    background: var(--cs-bg-light);
+    gap: 12px;
+}
+
+#cschat-output::-webkit-scrollbar { width: 6px; }
+#cschat-output::-webkit-scrollbar-track { background: transparent; }
+#cschat-output::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+#cschat-output::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+.cschat-message {
+    max-width: 80%;
+    padding: 10px 16px;
+    border-radius: 18px;
+    line-height: 1.5;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: cschat-appear 0.4s ease-out forwards;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+@keyframes cschat-appear {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cschat-bot {
+    background: linear-gradient(135deg, var(--cs-primary), var(--cs-primary-dark));
+    color: var(--cs-text-light);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px; 
+}
+
+.cschat-user {
+    background: var(--cs-user-bubble);
+    color: var(--cs-text-dark);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px; 
+}
+
+.cschat-bot::before, .cschat-user::after { content: none; }
+
+.cschat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-top: 5px;
+}
+
+.cschat-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--cs-primary);
+    background: var(--cs-bg-white);
+    color: var(--cs-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: cschat-appear 0.4s ease-out forwards;
+    transition: all 0.2s ease-in-out;
+}
+
+.cschat-btn:hover {
+    background: #899dc8;
+    color: var(--cs-text-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(90, 141, 255, 0.3);
+}
+
+.cschat-typing {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    align-self: flex-start;
+    padding: 10px 12px;
+    background: var(--cs-bg-white);
+    border-radius: 18px;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.cschat-typing .dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--cs-text-secondary);
+    border-radius: 50%;
+    animation: cschat-dotPulse 1.2s infinite ease-in-out;
+}
+
+.cschat-typing .dot:nth-child(2) { animation-delay: 0.2s; }
+.cschat-typing .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes cschat-dotPulse {
+    0%, 60%, 100% { transform: scale(0.8); }
+    30% { transform: scale(1.2); }
+}
+
+#cschat-popup {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    background: var(--cs-bg-white);
+    color: var(--cs-text-dark);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: cschat-slideInOut 8s ease-in-out forwards;
+    z-index: 998;
+    max-width: 300px;
+    border: 1px solid var(--cs-border-color);
+}
+
+@keyframes cschat-slideInOut {
+    0% { transform: translateX(calc(100% + 30px)); opacity: 0; }
+    10%, 80% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(calc(100% + 30px)); opacity: 0; }
+}
+
+#cschat-popup .cschat-avatar {
+    font-size: 24px;
+    color: var(--cs-primary);
+}
+
+.cschat-text { font-size: 14px; }
+#cschat-popup::after, .cschat-text::after { content: none; }
+
+#cschat-end {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--cs-bg-white);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: none;
+    z-index: 1001;
+    animation: cschat-popIn 0.4s ease-out forwards;
+}
+
+@keyframes cschat-popIn {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+#cschat-end h2 {
+    font-size: 24px;
+    color: var(--cs-text-dark);
+    margin-bottom: 8px;
+}
+
+#cschat-end p {
+    font-size: 16px;
+    color: var(--cs-text-secondary);
+}
+
+.cschat-btn1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: max-content;  
+    position: relative;
+}
+
+
+.cschat-btn-end, .cschat-btn-repeat {
+    padding: 6px 14px;
+    border-width: 1px;
+    background: var(--cs-bg-white);
+}
+
+.cschat-btn-end {
+    border-color: var(--cs-danger);
+    color: var(--cs-danger);
+}
+.cschat-btn-end:hover {
+    background: var(--cs-danger);
+    color: var(--cs-text-light);
+    border-color: var(--cs-danger);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+}
+
+.cschat-btn-repeat {
+    border-color: var(--cs-success);
+    color: var(--cs-success);
+}
+.cschat-btn-repeat:hover {
+    background: var(--cs-success);
+    color: var(--cs-text-light);
+    border-color: var(--cs-success);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.cschat-btn-end::before, .cschat-btn-repeat::before { content: none; }
+
+
+@media (max-width: 600px) {
+    #cschat-toggle-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 24px;
+        bottom: 16px;
+        right: 16px;
+    }
+
+    #cschat-container {
+        width: calc(100vw - 32px);
+        height: calc(100vh - 90px);
+        max-height: none;
+        bottom: 80px;
+        right: 16px;
+        left: 16px;
+    }
+
+    #cschat-popup {
+        bottom: 80px;
+        right: 16px;
+        max-width: calc(100vw - 32px);
+    }
+}
+
+#cschat-toggle-btn i {
+    animation: cschat-icon-wave 2.5s infinite ease-in-out;
+}
+
+@keyframes cschat-icon-wave {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+}
+
+#cschat-toggle-btn[aria-pressed="true"] i {
+    animation: none;
+}
+
+.wave-emoji {
+    display: inline-block;
+    transform-origin: 70% 70%;
+    animation: emoji-wave-animation 2.5s infinite;
+}
+
+@keyframes emoji-wave-animation {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+}
