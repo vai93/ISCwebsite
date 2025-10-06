@@ -28,7 +28,7 @@ function renderJobListings(jobsData) {
 
   if (!jobsData || jobsData.length === 0) {
     accordionContainer.innerHTML =
-      '<p class="text-center text-muted">No openings are available at the moment, but we are always looking for talented people. Please check back later.</p>';
+      '<p class="text-center text-muted">No openings are available at the moment, but you can still submit your application below.</p>';
     return;
   }
 
@@ -53,43 +53,39 @@ function renderJobListings(jobsData) {
     }
 
     accordionHTML += `
-                    <div class="accordion-item fade-in" style="transition-delay: ${
-                      index * 0.2
-                    }s;">
-                        <h2 class="accordion-header" id="${headingId}">
-                            <button class="accordion-button ${
-                              isFirst ? "" : "collapsed"
-                            }" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" aria-controls="${collapseId}">
-                                <div class="job-title-wrapper">
-                                    <h5>${job.heading || "N/A"}</h5>
-                                    <span class="job-meta">${
-                                      job.subheading || ""
-                                    }</span>
-                                </div>
-                                <i class="fas ${
-                                  isFirst ? "fa-caret-up" : "fa-caret-down"
-                                } accordion-icon"></i>
-                            </button>
-                        </h2>
-                        <div id="${collapseId}" class="accordion-collapse collapse ${
-      isFirst ? "show" : ""
-    }" aria-labelledby="${headingId}" data-bs-parent="#careerAccordion">
-                            <div class="accordion-body">
-                                ${
-                                  job["Job Description"]
-                                    ? `<h6>Job Description:</h6><p>${job["Job Description"]}</p>`
-                                    : ""
-                                }
-                                ${responsibilitiesHTML}
-                                <button class="btn apply-now-btn" data-job-title="${
-                                  job.heading || ""
-                                }">
-                                    <i class="fas fa-paper-plane me-2"></i>Apply Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
+      <div class="accordion-item fade-in" style="transition-delay: ${index * 0.2}s;">
+        <h2 class="accordion-header" id="${headingId}">
+          <button class="accordion-button ${isFirst ? "" : "collapsed"}" 
+                  type="button" 
+                  data-bs-toggle="collapse" 
+                  data-bs-target="#${collapseId}" 
+                  aria-expanded="${isFirst}" 
+                  aria-controls="${collapseId}">
+            <div class="job-title-wrapper">
+              <h5>${job.heading || "N/A"}</h5>
+              <span class="job-meta">${job.subheading || ""}</span>
+            </div>
+            <i class="fas ${isFirst ? "fa-caret-up" : "fa-caret-down"} accordion-icon"></i>
+          </button>
+        </h2>
+        <div id="${collapseId}" 
+             class="accordion-collapse collapse ${isFirst ? "show" : ""}" 
+             aria-labelledby="${headingId}" 
+             data-bs-parent="#careerAccordion">
+          <div class="accordion-body">
+            ${
+              job["Job Description"]
+                ? `<h6>Job Description:</h6><p>${job["Job Description"]}</p>`
+                : ""
+            }
+            ${responsibilitiesHTML}
+            <button class="btn apply-now-btn" data-job-title="${job.heading || ""}">
+              <i class="fas fa-paper-plane me-2"></i>Apply Now
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
   });
   accordionContainer.innerHTML = accordionHTML;
 }
@@ -149,17 +145,13 @@ async function loadJobsAndInitialize() {
     const worksheet = workbook.Sheets[firstSheetName];
     const jobsData = XLSX.utils.sheet_to_json(worksheet);
 
-    if (!jobsData || jobsData.length === 0) {
-      applySection.style.display = "none";
-    }
-
     renderJobListings(jobsData);
     setupEventListeners();
   } catch (error) {
     console.error("Error loading job data:", error);
     const accordionContainer = document.getElementById("careerAccordion");
-    accordionContainer.innerHTML = `<p class="text-center text-danger">Could not load job openings. Please ensure the 'jobs_data.xlsx' file is in the correct folder.</p>`;
-    applySection.style.display = "none";
+    accordionContainer.innerHTML = `<p class="text-center text-danger">Could not load job openings. You can still submit your application below.</p>`;
+    
   }
 }
 
@@ -199,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const isScrollable = () =>
     document.documentElement.scrollHeight > window.innerHeight + 10;
 
-  const SCROLL_TRIGGER = Math.round(window.innerHeight * 0.15); 
+  const SCROLL_TRIGGER = Math.round(window.innerHeight * 0.15);
 
   function toggleBackToTop() {
     if (
@@ -221,14 +213,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", toggleBackToTop, { passive: true });
 })();
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
   const submitBtn = form.querySelector("button[type='submit']");
   const fileInput = document.getElementById("resume");
   const fileNameDisplay = document.querySelector(".file-upload-filename");
 
-  // Show selected filename
   fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
     fileNameDisplay.textContent = file ? file.name : "No file selected...";
@@ -236,20 +226,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   submitBtn.addEventListener("click", async function (e) {
     e.preventDefault();
-     this.classList.add("loading");
-     this.innerHTML = `
+    this.classList.add("loading");
+    this.innerHTML = `
       <svg class="spinner" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
       </svg>
       Sending...
-  `;
+    `;
     const formData = new FormData();
     formData.append("name", document.getElementById("fname").value.trim());
     formData.append("contact", document.getElementById("phone").value.trim());
     formData.append("email", document.getElementById("email").value.trim());
     formData.append("position", document.getElementById("position").value.trim());
     formData.append("message", document.getElementById("message").value.trim());
-    formData.append("websiteId", "ISC"); // adjust if multiple sites
+    formData.append("websiteId", "ISC");
     if (fileInput.files.length > 0) {
       formData.append("resume", fileInput.files[0]);
     }
@@ -267,16 +257,14 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("✅ " + result.message);
       form.reset();
       fileNameDisplay.textContent = "No file selected...";
- } catch (err) {
-        console.error(err);
-    alert("Something went wrong. Please try again.");
-
-    submitBtn.classList.remove("loading");
-    submitBtn.innerHTML = 'Submit Application';
-    }finally{
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
       submitBtn.classList.remove("loading");
-       submitBtn.innerHTML = 'Submit Application';
+      submitBtn.innerHTML = 'Submit Application';
+    } finally {
+      submitBtn.classList.remove("loading");
+      submitBtn.innerHTML = 'Submit Application';
     }
-    
   });
 });
