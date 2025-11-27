@@ -130,28 +130,66 @@ function setupEventListeners() {
   document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
 }
 
+const GOOGLE_SHEET_ID = "1VNIqtk4GKd12UCTifImxvfcy622Rhox5ZJ9WzC4kA1g";
+const GOOGLE_SHEET_GID = "0";
+
+async function fetchJobsDataFromSheet() {
+  // Uses the lightweight Google Visualization API endpoint to read shared rows.
+  const sheetUrl = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json&gid=${GOOGLE_SHEET_GID}`;
+  const response = await fetch(sheetUrl, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`Network response was not ok: ${response.statusText}`);
+  }
+
+  const text = await response.text();
+  const jsonStart = text.indexOf("{");
+  const jsonEnd = text.lastIndexOf("}");
+  if (jsonStart === -1 || jsonEnd === -1) {
+    throw new Error("Could not parse Google Sheets response");
+  }
+
+  const payload = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+  const table = payload.table || { cols: [], rows: [] };
+  const providedLabels = table.cols.map((col) => (col.label || "").trim());
+  let columns = providedLabels.map(
+    (label, index) => label || table.cols[index]?.id || `Column_${index}`
+  );
+  let rows = table.rows || [];
+
+  // If Google didn't promote the first row to headers, use the first row manually.
+  const hasProvidedLabels = providedLabels.some((label) => label.length > 0);
+  if (!hasProvidedLabels && rows.length > 0) {
+    columns = rows[0].c.map((cell, index) => {
+      const headerValue = (cell?.v ?? "").toString().trim();
+      return headerValue || table.cols[index]?.id || `Column_${index}`;
+    });
+    rows = rows.slice(1);
+  }
+
+  return rows
+    .map((row) => {
+      const job = {};
+      columns.forEach((colName, idx) => {
+        job[colName] = row.c[idx]?.v ?? "";
+      });
+      return job;
+    })
+    .filter((job) =>
+      ["heading", "subheading", "Job Description", "Key Responsibilities"].some(
+        (key) => job[key] && String(job[key]).trim() !== ""
+      )
+    );
+}
+
 async function loadJobsAndInitialize() {
-  const filePath = "js/jobs_data.xlsx";
-  const applySection = document.getElementById("applynow");
-
   try {
-    const response = await fetch(filePath);
-    if (!response.ok)
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-
-    const arrayBuffer = await response.arrayBuffer();
-    const workbook = XLSX.read(arrayBuffer, { type: "array" });
-    const firstSheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[firstSheetName];
-    const jobsData = XLSX.utils.sheet_to_json(worksheet);
-
+    const jobsData = await fetchJobsDataFromSheet();
     renderJobListings(jobsData);
     setupEventListeners();
   } catch (error) {
     console.error("Error loading job data:", error);
     const accordionContainer = document.getElementById("careerAccordion");
     accordionContainer.innerHTML = `<p class="text-center text-danger">Could not load job openings. You can still submit your application below.</p>`;
-    
   }
 }
 
